@@ -33,36 +33,36 @@ public class CurrencyRateRateServiceMockImpl implements CurrencyRateService {
 
     private Map<CurrencyType, Double> getRubRates() {
         Map<CurrencyType, Double> map = new HashMap<>();
-        map.put(CurrencyType.CURRENCY_NAME_EUR, 0.01538);
-        map.put(CurrencyType.CURRENCY_NAME_USD, 0.01587);
-        map.put(CurrencyType.CURRENCY_NAME_AMD, 0.01464);
+        map.put(CurrencyType.CURRENCY_NAME_EUR, 0.017);
+        map.put(CurrencyType.CURRENCY_NAME_USD, 0.017);
+        map.put(CurrencyType.CURRENCY_NAME_AMD, 6.89);
 
         return map;
     }
 
     private Map<CurrencyType, Double> getEurRates() {
         Map<CurrencyType, Double> map = new HashMap<>();
-        map.put(CurrencyType.CURRENCY_NAME_RUB, 0.01538);
-        map.put(CurrencyType.CURRENCY_NAME_USD, 0.01587);
-        map.put(CurrencyType.CURRENCY_NAME_AMD, 0.01464);
+        map.put(CurrencyType.CURRENCY_NAME_RUB, 58.66);
+        map.put(CurrencyType.CURRENCY_NAME_USD, 0.99);
+        map.put(CurrencyType.CURRENCY_NAME_AMD, 404.22);
 
         return map;
     }
 
     private Map<CurrencyType, Double> getUsdRates() {
         Map<CurrencyType, Double> map = new HashMap<>();
-        map.put(CurrencyType.CURRENCY_NAME_RUB, 0.01538);
-        map.put(CurrencyType.CURRENCY_NAME_EUR, 0.01587);
-        map.put(CurrencyType.CURRENCY_NAME_AMD, 0.01464);
+        map.put(CurrencyType.CURRENCY_NAME_RUB, 59.03);
+        map.put(CurrencyType.CURRENCY_NAME_EUR, 1.01);
+        map.put(CurrencyType.CURRENCY_NAME_AMD, 406.49);
 
         return map;
     }
 
     private Map<CurrencyType, Double> getAmdRates() {
         Map<CurrencyType, Double> map = new HashMap<>();
-        map.put(CurrencyType.CURRENCY_NAME_RUB, 0.01538);
-        map.put(CurrencyType.CURRENCY_NAME_USD, 0.01587);
-        map.put(CurrencyType.CURRENCY_NAME_EUR, 0.01464);
+        map.put(CurrencyType.CURRENCY_NAME_RUB, 0.015);
+        map.put(CurrencyType.CURRENCY_NAME_USD, 0.025);
+        map.put(CurrencyType.CURRENCY_NAME_EUR, 0.0025);
 
         return map;
     }

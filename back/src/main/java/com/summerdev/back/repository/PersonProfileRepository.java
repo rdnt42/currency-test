@@ -6,7 +6,6 @@ import com.summerdev.back.entity.PersonProfile;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -17,8 +16,11 @@ public class PersonProfileRepository {
 
     @PostConstruct
     private void init() {
-        Currency currency = new Currency(CurrencyType.CURRENCY_NAME_RUB, 100000);
-        List<Currency> currencies = Stream.of(currency)
+        Currency currencyRub = new Currency(CurrencyType.CURRENCY_NAME_RUB, 100000);
+        Currency currencyEur = new Currency(CurrencyType.CURRENCY_NAME_EUR, 0);
+        Currency currencyUsd = new Currency(CurrencyType.CURRENCY_NAME_USD, 0);
+        Currency currencyAmd = new Currency(CurrencyType.CURRENCY_NAME_AMD, 0);
+        List<Currency> currencies = Stream.of(currencyRub, currencyEur, currencyUsd, currencyAmd)
                 .collect(Collectors.toList());
         personProfile = new PersonProfile(currencies);
     }

@@ -36,25 +36,30 @@ public class PersonProfileServiceImpl implements PersonProfileService {
         CurrencyType currencyTypeTo = CurrencyType.getById(request.getCurrencyTypeIdTo());
         long currencyValueTo = currencyConverter.convert(currencyTypeFrom, currencyTypeTo, currencyValueFrom);
 
-        updatePersonProfileCurrency(personProfile, currencyTypeFrom, currencyValueFrom);
-        updatePersonProfileCurrency(personProfile, currencyTypeTo, currencyValueTo);
+        decreaseBalance(personProfile, currencyTypeFrom, currencyValueFrom);
+        increaseBalance(personProfile, currencyTypeTo, currencyValueTo);
 
         return personProfileResponseConverter.convert(personProfile);
     }
 
-    private void updatePersonProfileCurrency(PersonProfile profile, CurrencyType currencyType, long newValue) {
+    private void increaseBalance(PersonProfile profile, CurrencyType currencyType, long value) {
         Currency currency = profile.getCurrencies().stream()
                 .filter(c -> c.getCurrencyType().equals(currencyType))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow();
 
-        // TODO переделать в мапу
-        if (currency == null) {
-            currency = new Currency(currencyType, newValue);
-            profile.getCurrencies().add(currency);
-        } else {
-            currency.setCurrencyValue(newValue);
-        }
+        long newValue = currency.getCurrencyValue() + value;
+        currency.setCurrencyValue(newValue);
+    }
+
+    private void decreaseBalance(PersonProfile profile, CurrencyType currencyType, long value) {
+        Currency currency = profile.getCurrencies().stream()
+                .filter(c -> c.getCurrencyType().equals(currencyType))
+                .findFirst()
+                .orElseThrow();
+
+        long newValue = currency.getCurrencyValue() - value;
+        currency.setCurrencyValue(newValue);
     }
 
     private void checkCurrentBalance(CurrencyType checkedCurrency, PersonProfile profile, long checkedValue) {

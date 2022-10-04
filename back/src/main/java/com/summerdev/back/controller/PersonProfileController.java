@@ -1,11 +1,11 @@
 package com.summerdev.back.controller;
 
 import com.summerdev.back.entity.PersonProfile;
+import com.summerdev.back.request.UpdateCurrencyRequest;
+import com.summerdev.back.response.PersonProfileResponse;
 import com.summerdev.back.service.PersonProfileService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RequestMapping("api/web/")
@@ -14,7 +14,12 @@ public class PersonProfileController {
     private final PersonProfileService personProfileService;
 
     @GetMapping("/profile")
-    public PersonProfile get() {
+    public PersonProfileResponse get() {
         return personProfileService.getPersonProfile();
+    }
+
+    @PostMapping("/profile/convertCurrency")
+    public PersonProfile convertCurrency(@RequestBody UpdateCurrencyRequest request) {
+        return personProfileService.updateProfileCurrency(request);
     }
 }

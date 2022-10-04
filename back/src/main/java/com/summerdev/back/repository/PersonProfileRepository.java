@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class PersonProfileRepository {
@@ -15,10 +18,9 @@ public class PersonProfileRepository {
     @PostConstruct
     private void init() {
         Currency currency = new Currency(CurrencyType.CURRENCY_NAME_RUB, 100000);
-        personProfile = PersonProfile
-                .builder()
-                .currencies(Collections.singletonList(currency))
-                .build();
+        List<Currency> currencies = Stream.of(currency)
+                .collect(Collectors.toList());
+        personProfile = new PersonProfile(currencies);
     }
 
     public PersonProfile getPersonProfile() {

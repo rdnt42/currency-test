@@ -1,6 +1,5 @@
 package com.summerdev.back.controller;
 
-import com.summerdev.back.entity.PersonProfile;
 import com.summerdev.back.request.UpdateCurrencyRequest;
 import com.summerdev.back.response.PersonProfileResponse;
 import com.summerdev.back.service.PersonProfileService;
@@ -19,7 +18,7 @@ public class PersonProfileController {
     }
 
     @PostMapping("/profile/convertCurrency")
-    public PersonProfile convertCurrency(@RequestBody UpdateCurrencyRequest request) {
+    public PersonProfileResponse convertCurrency(@RequestBody UpdateCurrencyRequest request) {
         return personProfileService.updateProfileCurrency(request);
     }
 }

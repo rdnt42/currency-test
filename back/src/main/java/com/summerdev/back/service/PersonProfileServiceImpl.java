@@ -26,7 +26,7 @@ public class PersonProfileServiceImpl implements PersonProfileService {
 
     // TODO разнести по сервисам
     @Override
-    public PersonProfile updateProfileCurrency(UpdateCurrencyRequest request) {
+    public PersonProfileResponse updateProfileCurrency(UpdateCurrencyRequest request) {
         PersonProfile personProfile = personProfileRepository.getPersonProfile();
         CurrencyType currencyTypeFrom = CurrencyType.getById(request.getCurrencyTypeIdFrom());
         long currencyValueFrom = request.getCurrencyValueFrom() * 100;
@@ -39,9 +39,8 @@ public class PersonProfileServiceImpl implements PersonProfileService {
         updatePersonProfileCurrency(personProfile, currencyTypeFrom, currencyValueFrom);
         updatePersonProfileCurrency(personProfile, currencyTypeTo, currencyValueTo);
 
-        return personProfile;
+        return personProfileResponseConverter.convert(personProfile);
     }
-
 
     private void updatePersonProfileCurrency(PersonProfile profile, CurrencyType currencyType, long newValue) {
         Currency currency = profile.getCurrencies().stream()
@@ -67,6 +66,5 @@ public class PersonProfileServiceImpl implements PersonProfileService {
         if (currency.getCurrencyValue() < checkedValue) {
             throw new IllegalStateException("Value for exchange less then current value");
         }
-
     }
 }

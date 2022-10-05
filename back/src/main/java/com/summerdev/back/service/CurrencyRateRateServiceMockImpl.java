@@ -1,6 +1,6 @@
 package com.summerdev.back.service;
 
-import com.summerdev.back.entities.CurrencyType;
+import com.summerdev.back.enums.CurrencyType;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

@@ -15,7 +15,7 @@ public class PersonProfileResponseConverter {
 
         for (Currency currency : profile.getCurrencies()) {
             String formatValue = String.format("%.2f", (currency.getCurrencyValue() / 100.0));
-            currencies.put(currency.getCurrencyType().getName(), formatValue);
+            currencies.put(currency.getCurrencyType().getTypeName(), formatValue);
         }
 
         return PersonProfileResponse

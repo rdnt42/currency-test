@@ -1,6 +1,6 @@
 package com.summerdev.back.entity;
 
-import com.summerdev.back.entities.CurrencyType;
+import com.summerdev.back.enums.CurrencyType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

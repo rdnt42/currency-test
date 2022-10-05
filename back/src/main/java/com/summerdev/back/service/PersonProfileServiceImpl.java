@@ -2,9 +2,9 @@ package com.summerdev.back.service;
 
 import com.summerdev.back.converter.CurrencyConverter;
 import com.summerdev.back.converter.PersonProfileResponseConverter;
-import com.summerdev.back.entities.CurrencyType;
 import com.summerdev.back.entity.Currency;
 import com.summerdev.back.entity.PersonProfile;
+import com.summerdev.back.enums.CurrencyType;
 import com.summerdev.back.repository.PersonProfileRepository;
 import com.summerdev.back.request.UpdateCurrencyRequest;
 import com.summerdev.back.response.PersonProfileResponse;
@@ -28,12 +28,12 @@ public class PersonProfileServiceImpl implements PersonProfileService {
     @Override
     public PersonProfileResponse updateProfileCurrency(UpdateCurrencyRequest request) {
         PersonProfile personProfile = personProfileRepository.getPersonProfile();
-        CurrencyType currencyTypeFrom = CurrencyType.getById(request.getCurrencyTypeIdFrom());
+        CurrencyType currencyTypeFrom = CurrencyType.getByTypeName(request.getCurrencyTypeFrom());
         long currencyValueFrom = request.getCurrencyValueFrom() * 100;
 
         checkCurrentBalance(currencyTypeFrom, personProfile, currencyValueFrom);
 
-        CurrencyType currencyTypeTo = CurrencyType.getById(request.getCurrencyTypeIdTo());
+        CurrencyType currencyTypeTo = CurrencyType.getByTypeName(request.getCurrencyTypeTo());
         long currencyValueTo = currencyConverter.convert(currencyTypeFrom, currencyTypeTo, currencyValueFrom);
 
         decreaseBalance(personProfile, currencyTypeFrom, currencyValueFrom);

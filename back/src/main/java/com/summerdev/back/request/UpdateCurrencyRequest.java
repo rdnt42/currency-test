@@ -7,11 +7,11 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class UpdateCurrencyRequest {
-    @ApiModelProperty(example = "1")
-    private final int currencyTypeIdFrom;
+    @ApiModelProperty(example = "RUB")
+    private final String currencyTypeFrom;
 
-    @ApiModelProperty(example = "2")
-    private final int currencyTypeIdTo;
+    @ApiModelProperty(example = "EUR")
+    private final String currencyTypeTo;
 
     @ApiModelProperty(example = "500")
     private final long currencyValueFrom;

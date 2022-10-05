@@ -1,6 +1,6 @@
 package com.summerdev.back.service;
 
-import com.summerdev.back.entities.CurrencyType;
+import com.summerdev.back.enums.CurrencyType;
 
 import java.util.Map;
 

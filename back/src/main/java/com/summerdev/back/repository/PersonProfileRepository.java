@@ -1,8 +1,8 @@
 package com.summerdev.back.repository;
 
-import com.summerdev.back.entities.CurrencyType;
 import com.summerdev.back.entity.Currency;
 import com.summerdev.back.entity.PersonProfile;
+import com.summerdev.back.enums.CurrencyType;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;

@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
@@ -43,7 +44,7 @@ public class ApplicationSecurity {
                 .authorizeHttpRequests((authorize) -> authorize
                         .anyRequest().authenticated()
                 )
-                .csrf((csrf) -> csrf.ignoringAntMatchers("/api/auth/token", "/swagger-ui"))
+                .csrf((csrf) -> csrf.ignoringAntMatchers("/api/auth/token"))
                 .httpBasic(Customizer.withDefaults())
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -53,6 +54,15 @@ public class ApplicationSecurity {
                 );
         // @formatter:on
         return http.build();
+    }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().antMatchers("/v2/api-docs/**",
+                "/swagger-ui/**",
+                "/swagger-resources/**",
+                "/swagger-ui.html",
+                "/webjars/**");
     }
 
     @Bean

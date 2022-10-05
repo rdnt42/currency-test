@@ -11,8 +11,8 @@
     <groupId>com.summerdev</groupId>
     <artifactId>back</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>back</name>
-    <description>back</description>
+    <name>currency-test</name>
+    <description>back for currency test</description>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -62,6 +62,7 @@
     </dependencies>
 
     <build>
+        <finalName>currency-exchanger</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

@@ -8,6 +8,7 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.ApiKey;
 import springfox.documentation.service.AuthorizationScope;
+import springfox.documentation.service.BasicAuth;
 import springfox.documentation.service.Contact;
 import springfox.documentation.service.SecurityReference;
 import springfox.documentation.spi.DocumentationType;
@@ -25,7 +26,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .securityContexts(Collections.singletonList(securityContext()))
-                .securitySchemes(List.of(apiKey()))
+                .securitySchemes(List.of(apiKey(), authKey()))
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.summerdev.back.controller"))
                 .paths(PathSelectors.any())
@@ -46,6 +47,10 @@ public class SwaggerConfig {
         return new ApiKey("JWT", "Authorization", "header");
     }
 
+    private BasicAuth authKey() {
+        return new BasicAuth("Basic");
+    }
+
     private SecurityContext securityContext() {
         return SecurityContext.builder().securityReferences(defaultAuth()).build();
     }
@@ -54,6 +59,9 @@ public class SwaggerConfig {
         AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
         authorizationScopes[0] = authorizationScope;
-        return List.of(new SecurityReference("JWT", authorizationScopes));
+        return List.of(
+                new SecurityReference("JWT", authorizationScopes),
+                new SecurityReference("Basic", authorizationScopes)
+        );
     }
 }
